@@ -35,10 +35,10 @@ public class TestClass {
         age.clear();
         age.sendKeys(ourAge);
 
-        if (age.getText().equals(ourAge)) {
-            System.out.println("correct");
+        if (age.getAttribute("value").equals(ourAge)) {
+            System.out.println("Pass");
         } else {
-            System.out.println("incorrect");
+            System.out.println("Fail");
         }
 
         driver.findElement(By.id("submit")).click();
