@@ -21,24 +21,19 @@ public class TestClass {
     }
 
     @Test
-    public void editTest() {
+    public void EditionOfTests() {
         driver.navigate().to("https://demoqa.com/webtables");
         driver.manage().window().maximize();
 
-        WebElement record1 = driver.findElement(By.xpath("//span[@id='edit-record-1']"));
-        record1.click();
+        driver.findElement(By.xpath("//span[@id='edit-record-1']")).click();
 
-        WebElement firstName = driver.findElement(By.xpath("//input[@id='firstName']"));
-        firstName.clear();
-        firstName.sendKeys("Lika");
+        driver.findElement(By.xpath("//input[@id='firstName']")).clear();
+        firstdriver.findElement(By.xpath("//input[@id='firstName']"))Name.sendKeys("Gigi");
 
-        WebElement age = driver.findElement(By.cssSelector("input[id='age']"));
-        String ourAge = "20";
+        driver.findElement(By.cssSelector("input[id='age']")).clear();
+        driver.findElement(By.cssSelector("input[id='age']")).sendKeys("20");
 
-        age.clear();
-        age.sendKeys(ourAge);
-
-        if (age.getAttribute("value").equals(ourAge)) {
+        if (driver.findElement(By.cssSelector("input[id='age']")).getAttribute("value").equals("20")) {
             System.out.println("Pass");
         } else {
             System.out.println("Fail");
@@ -51,13 +46,12 @@ public class TestClass {
                 .getText().equals("cierra@example.com"));
 
         for (int i = 1; i <= 2; i++) {
-            String xpath = "//div[@class='rt-tbody']//div[@class='rt-tr-group'][" + i + "]//div[@class='rt-td'][3]";
-            System.out.println(Integer.parseInt(driver.findElement(By.xpath(xpath)).getText()) > 25);
+            System.out.println(Integer.parseInt(driver.findElement(By.xpath("//div[@class='rt-tbody']//div[@class='rt-tr-group'][" + i + "]//div[@class='rt-td'][3]")).getText()) > 25);
         }
     }
 
     @AfterClass
-    public void tearDown() {
+    public void ShutDown() {
         driver.close();
     }
 }
