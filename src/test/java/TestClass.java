@@ -5,47 +5,38 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestClass {
-
     WebDriver driver;
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeMethod
+    public void driver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.navigate().to("https://demoqa.com/webtables");
+        driver.manage().window().maximize();
     }
 
     @Test
-    public void editTest() throws InterruptedException {
-        driver.navigate().to("https://demoqa.com/webtables");
-        driver.manage().window().maximize();
+    public void testMethod() {
+        driver.findElement(By.xpath("//*[@id='edit-record-1']")).click();
 
-        driver.findElement(By.id("edit-record-1")).click();
+        driver.findElement(By.xpath("//*[@id='firstName']")).clear();
+        driver.findElement(By.xpath("//*[@id='firstName']")).sendKeys("Lika");
 
-        WebElement firstName = driver.findElement(By.xpath("//input[@id='firstName']"));
+        driver.findElement(By.cssSelector("input[id=age]")).clear();
+        driver.findElement(By.cssSelector("input[id=age]")).sendKeys("20");
 
-        firstName.clear();
-        firstName.sendKeys("Mikheil");
-
-        WebElement age = driver.findElement(By.cssSelector("input[id='age']"));
-        String ourAge = "20";
-
-        age.clear();
-        age.sendKeys(ourAge);
-
-        if (age.getAttribute("value").equals(ourAge)) {
-            System.out.println("Pass");
+        if (driver.findElement(By.cssSelector("input[id=age]")).getAttribute("value").equals("20")) {
+            System.out.println("correct");
         } else {
-            System.out.println("Fail");
+            System.out.println("incorrect");
         }
 
         driver.findElement(By.id("submit")).click();
-    }
 
-    @AfterClass
-    public void tearDown() {
         driver.close();
     }
 }
